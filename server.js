@@ -130,7 +130,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _regenerator = __webpack_require__(/*! babel-runtime/regenerator */ \"babel-runtime/regenerator\");\n\nvar _regenerator2 = _interopRequireDefault(_regenerator);\n\nvar _asyncToGenerator2 = __webpack_require__(/*! babel-runtime/helpers/asyncToGenerator */ \"babel-runtime/helpers/asyncToGenerator\");\n\nvar _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _ssr = __webpack_require__(/*! @apollo/client/react/ssr */ \"@apollo/client/react/ssr\");\n\nvar _nodeFetch = __webpack_require__(/*! node-fetch */ \"node-fetch\");\n\nvar _nodeFetch2 = _interopRequireDefault(_nodeFetch);\n\nvar _app = __webpack_require__(/*! ./app */ \"./src/app.js\");\n\nvar _app2 = _interopRequireDefault(_app);\n\nvar _constans = __webpack_require__(/*! ./constans */ \"./src/constans.js\");\n\nvar _client = __webpack_require__(/*! @apollo/client */ \"@apollo/client\");\n\nvar _apolloClient = __webpack_require__(/*! apollo-client */ \"apollo-client\");\n\nvar _apolloCacheInmemory = __webpack_require__(/*! apollo-cache-inmemory */ \"apollo-cache-inmemory\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// ✅ and apollo-cache-inmemory\n\n// import { ApolloClient } from '@apollo/client' // 🕷 It doesn't work with @apollo-client\n// import { InMemoryCache } from '@apollo/client' // 🕷 same here\n\nvar apolloClient = new _apolloClient.ApolloClient({\n  ssrMode: true,\n  link: new _client.HttpLink({\n    uri: _constans.API_URL,\n    fetch: _nodeFetch2.default\n  }),\n  cache: new _apolloCacheInmemory.InMemoryCache(),\n  defaultOptions: {\n    watchQuery: {\n      fetchPolicy: 'network-only',\n      errorPolicy: 'ignore'\n    },\n    query: {\n      fetchPolicy: 'network-only',\n      errorPolicy: 'all'\n    },\n    mutate: {\n      errorPolicy: 'all'\n    }\n  }\n}); // ✅ But it works with apollo-client v2.6.x\n\n\nvar renderApp = function () {\n  var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {\n    var html, apolloState;\n    return _regenerator2.default.wrap(function _callee$(_context) {\n      while (1) {\n        switch (_context.prev = _context.next) {\n          case 0:\n            _context.next = 2;\n            return (0, _ssr.renderToStringWithData)(_react2.default.createElement(\n              _client.ApolloProvider,\n              { client: apolloClient },\n              _react2.default.createElement(_app2.default, null)\n            ));\n\n          case 2:\n            html = _context.sent;\n            apolloState = apolloClient.extract();\n            return _context.abrupt('return', { html: html, apolloState: apolloState });\n\n          case 5:\n          case 'end':\n            return _context.stop();\n        }\n      }\n    }, _callee, undefined);\n  }));\n\n  return function renderApp() {\n    return _ref.apply(this, arguments);\n  };\n}();\n\nexports.default = renderApp;\n\n//# sourceURL=webpack:///./src/server.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _regenerator = __webpack_require__(/*! babel-runtime/regenerator */ \"babel-runtime/regenerator\");\n\nvar _regenerator2 = _interopRequireDefault(_regenerator);\n\nvar _asyncToGenerator2 = __webpack_require__(/*! babel-runtime/helpers/asyncToGenerator */ \"babel-runtime/helpers/asyncToGenerator\");\n\nvar _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _ssr = __webpack_require__(/*! @apollo/client/react/ssr */ \"@apollo/client/react/ssr\");\n\nvar _nodeFetch = __webpack_require__(/*! node-fetch */ \"node-fetch\");\n\nvar _nodeFetch2 = _interopRequireDefault(_nodeFetch);\n\nvar _app = __webpack_require__(/*! ./app */ \"./src/app.js\");\n\nvar _app2 = _interopRequireDefault(_app);\n\nvar _constans = __webpack_require__(/*! ./constans */ \"./src/constans.js\");\n\nvar _client = __webpack_require__(/*! @apollo/client */ \"@apollo/client\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n// 🕷 same here\n\n// import { ApolloClient } from 'apollo-client' // ✅ But it works with apollo-client v2.6.x\n// import { InMemoryCache } from 'apollo-cache-inmemory' // ✅ and apollo-cache-inmemory\n\nvar apolloClient = new _client.ApolloClient({\n  ssrMode: true,\n  link: new _client.HttpLink({\n    uri: _constans.API_URL,\n    fetch: _nodeFetch2.default\n  }),\n  cache: new _client.InMemoryCache(),\n  defaultOptions: {\n    watchQuery: {\n      fetchPolicy: 'network-only',\n      errorPolicy: 'ignore'\n    },\n    query: {\n      fetchPolicy: 'network-only',\n      errorPolicy: 'all'\n    },\n    mutate: {\n      errorPolicy: 'all'\n    }\n  }\n}); // 🕷 It doesn't work with @apollo-client\n\n\nvar renderApp = function () {\n  var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {\n    var html, apolloState;\n    return _regenerator2.default.wrap(function _callee$(_context) {\n      while (1) {\n        switch (_context.prev = _context.next) {\n          case 0:\n            _context.next = 2;\n            return (0, _ssr.renderToStringWithData)(_react2.default.createElement(\n              _client.ApolloProvider,\n              { client: apolloClient },\n              _react2.default.createElement(_app2.default, null)\n            ));\n\n          case 2:\n            html = _context.sent;\n            apolloState = apolloClient.extract();\n            return _context.abrupt('return', { html: html, apolloState: apolloState });\n\n          case 5:\n          case 'end':\n            return _context.stop();\n        }\n      }\n    }, _callee, undefined);\n  }));\n\n  return function renderApp() {\n    return _ref.apply(this, arguments);\n  };\n}();\n\nexports.default = renderApp;\n\n//# sourceURL=webpack:///./src/server.js?");
 
 /***/ }),
 
@@ -153,28 +153,6 @@ eval("module.exports = require(\"@apollo/client\");\n\n//# sourceURL=webpack:///
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"@apollo/client/react/ssr\");\n\n//# sourceURL=webpack:///external_%22@apollo/client/react/ssr%22?");
-
-/***/ }),
-
-/***/ "apollo-cache-inmemory":
-/*!****************************************!*\
-  !*** external "apollo-cache-inmemory" ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("module.exports = require(\"apollo-cache-inmemory\");\n\n//# sourceURL=webpack:///external_%22apollo-cache-inmemory%22?");
-
-/***/ }),
-
-/***/ "apollo-client":
-/*!********************************!*\
-  !*** external "apollo-client" ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-eval("module.exports = require(\"apollo-client\");\n\n//# sourceURL=webpack:///external_%22apollo-client%22?");
 
 /***/ }),
 
