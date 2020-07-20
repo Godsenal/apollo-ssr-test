@@ -5,11 +5,11 @@ import App from './app'
 import { API_URL } from './constans'
 import { ApolloProvider, HttpLink } from '@apollo/client'
 
-// import { ApolloClient } from '@apollo/client' // 🕷 It doesn't work with @apollo-client
-// import { InMemoryCache } from '@apollo/client' // 🕷 same here
+import { ApolloClient } from '@apollo/client' // 🕷 It doesn't work with @apollo-client
+import { InMemoryCache } from '@apollo/client' // 🕷 same here
 
-import { ApolloClient } from 'apollo-client' // ✅ But it works with apollo-client v2.6.x
-import { InMemoryCache } from 'apollo-cache-inmemory' // ✅ and apollo-cache-inmemory
+// import { ApolloClient } from 'apollo-client' // ✅ But it works with apollo-client v2.6.x
+// import { InMemoryCache } from 'apollo-cache-inmemory' // ✅ and apollo-cache-inmemory
 
 const apolloClient = new ApolloClient({
   ssrMode: true,
