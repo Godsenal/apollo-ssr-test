@@ -1,23 +1,17 @@
-import nodeExternals from 'webpack-node-externals'
+import nodeExternals from "webpack-node-externals";
 
 const bundle = (_, argv) => {
   const clientConfig = {
-    entry: './build/client.js',
+    entry: "./build/client.js",
     output: {
-      filename: './app.js',
-      publicPath: 'http://localhost:9000/',
-    },
-    devServer: {
-      port: 9000,
-      headers: { 'Access-Control-Allow-Origin': '*' },
-      disableHostCheck: true,
+      filename: "./app.js",
     },
     module: {
       rules: [
         {
           test: /\.(js)$/,
           exclude: /node_modules/,
-          use: ['babel-loader'],
+          use: ["babel-loader"],
         },
       ],
     },
@@ -29,24 +23,24 @@ const bundle = (_, argv) => {
       version: false,
       children: false,
     },
-  }
+  };
 
   const serverConfig = {
     ...clientConfig,
-    entry: './build/server.js',
-    target: 'node',
+    entry: "./build/server.js",
+    target: "node",
     externals: [nodeExternals()],
     output: {
       path: __dirname,
-      filename: 'server.js',
-      publicPath: '/',
+      filename: "server.js",
+      publicPath: "/",
     },
-  }
+  };
 
-  if (argv.for === 'client') return clientConfig
-  if (argv.for === 'server') return serverConfig
+  if (argv.for === "client") return clientConfig;
+  if (argv.for === "server") return serverConfig;
 
-  return [clientConfig, serverConfig]
-}
+  return [clientConfig, serverConfig];
+};
 
-export default bundle
+export default bundle;

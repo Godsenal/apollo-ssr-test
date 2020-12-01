@@ -1,15 +1,15 @@
-import React from 'react'
-import { renderToStringWithData } from '@apollo/client/react/ssr'
-import fetch from 'node-fetch'
-import App from './app'
-import { API_URL } from './constans'
-import { ApolloProvider, HttpLink } from '@apollo/client'
-
-import { ApolloClient } from '@apollo/client' // 🕷 It doesn't work with @apollo-client
-import { InMemoryCache } from '@apollo/client' // 🕷 same here
-
-// import { ApolloClient } from 'apollo-client' // ✅ But it works with apollo-client v2.6.x
-// import { InMemoryCache } from 'apollo-cache-inmemory' // ✅ and apollo-cache-inmemory
+import React from "react";
+import { renderToString } from "react-dom/server";
+import fetch from "node-fetch";
+import App from "./app";
+import { API_URL } from "./constans";
+import {
+  ApolloProvider,
+  HttpLink,
+  ApolloClient,
+  InMemoryCache,
+} from "@apollo/client";
+import { getDataFromTree } from "@apollo/client/react/ssr";
 
 const apolloClient = new ApolloClient({
   ssrMode: true,
@@ -20,28 +20,21 @@ const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   defaultOptions: {
     watchQuery: {
-      fetchPolicy: 'network-only',
-      errorPolicy: 'ignore',
-    },
-    query: {
-      fetchPolicy: 'network-only',
-      errorPolicy: 'all',
-    },
-    mutate: {
-      errorPolicy: 'all',
+      nextFetchPolicy: "cache-first",
     },
   },
-})
+});
 
 const renderApp = async () => {
-  const html = await renderToStringWithData(
+  await getDataFromTree(App);
+  const html = renderToString(
     <ApolloProvider client={apolloClient}>
       <App />
     </ApolloProvider>
-  )
-  const apolloState = apolloClient.extract()
+  );
+  const apolloState = apolloClient.extract();
 
-  return { html, apolloState }
-}
+  return { html, apolloState };
+};
 
-export default renderApp
+export default renderApp;

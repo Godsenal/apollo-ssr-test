@@ -1,5 +1,5 @@
 query {
-  posts {
+  albums {
     data {
       id
       title
